@@ -1,0 +1,9 @@
+{
+  "task": "VesselSegmentation",
+  "modality": "ct",
+  "train-data": "raw/train",
+  "mask": ["mask.nii.gz"],
+  "images": {"image": ["image.nii.gz"]},
+  "labels": [0, 1],
+  "final_classes": {"vessel": [1]}
+}

@@ -1,0 +1,9 @@
+# Runtime outputs — not committed
+datasets/*/raw/
+numpy/
+results/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo

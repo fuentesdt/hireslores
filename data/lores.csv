@@ -1,0 +1,13 @@
+id,mask,image
+001,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S018/20230531/PreTxArtLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S018/20230531/PreTxArtLoRes.raw.nii.gz
+002,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S018/20230531/PstTxPreLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S018/20230531/PstTxPreLoRes.raw.nii.gz
+003,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S019/20230412/PreTxArtLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S019/20230412/PreTxArtLoRes.raw.nii.gz
+004,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S019/20230412/PstTxPreLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S019/20230412/PstTxPreLoRes.raw.nii.gz
+005,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S020/20230418/PreTxArtLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S020/20230418/PreTxArtLoRes.raw.nii.gz
+006,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S020/20230418/PstTxPreLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S020/20230418/PstTxPreLoRes.raw.nii.gz
+007,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S021/20230503/PreTxArtLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S021/20230503/PreTxArtLoRes.raw.nii.gz
+008,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S021/20230503/PstTxPreLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S021/20230503/PstTxPreLoRes.raw.nii.gz
+009,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S022/20230517/PreTxArtLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S022/20230517/PreTxArtLoRes.raw.nii.gz
+010,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S022/20230517/PstTxPreLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S022/20230517/PstTxPreLoRes.raw.nii.gz
+011,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S023/20230524/PreTxArtLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S023/20230524/PreTxArtLoRes.raw.nii.gz
+012,/rsrch3/ip/dtfuentes/github/oncopigdata/vesseltraining/ZPAF23S023/20230524/PstTxPreLoRes.vessellabel.nii.gz,/rsrch3/ip/dtfuentes/github/oncopigdata/Processed/ZPAF23S023/20230524/PstTxPreLoRes.raw.nii.gz
