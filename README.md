@@ -32,6 +32,37 @@ cd hireslores
 make all
 ```
 
+## Docker
+
+A `Dockerfile` is provided with all dependencies pre-installed (`mist-medical[train]`, `pandas`, `tabulate`).
+
+**Build the image:**
+
+```bash
+make docker-build
+# or: docker build -t mist-hireslores .
+```
+
+**Run the full pipeline inside Docker:**
+
+```bash
+make docker-run
+```
+
+This mounts the project directory and the source data path into the container, so results and numpy arrays are written back to the host. Requires `nvidia-container-toolkit` and access to `/rsrch3/ip/dtfuentes/github/oncopigdata/` on the host.
+
+Tuneable parameters work the same way:
+
+```bash
+make docker-run EPOCHS=100 BATCH=4 MODEL=mednext-base
+```
+
+Override the image name or data path:
+
+```bash
+make docker-run IMAGE=my-registry/mist-hireslores DATA_DIR=/mnt/data
+```
+
 ## Step-by-step
 
 ### 1. Setup — create symlink directory structure
