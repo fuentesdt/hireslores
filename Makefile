@@ -25,11 +25,16 @@ MODEL   ?= nnunet
 BATCH   ?= 2
 WORKERS ?= 4
 
+# ---- Docker parameters ----
+IMAGE    ?= mist-hireslores
+DATA_DIR ?= /rsrch3/ip/dtfuentes/github/oncopigdata
+
 # ---- Experiment matrix ----
 DATASETS := hires lores
 LOSSES   := dice_ce cldice
 
-.PHONY: all setup analyze preprocess experiments train summary clean distclean
+.PHONY: all setup analyze preprocess experiments train summary clean distclean \
+        docker-build docker-run
 
 all: summary
 
@@ -135,3 +140,20 @@ clean:
 
 distclean: clean
 	rm -rf datasets/hires/raw datasets/lores/raw
+
+# ==============================================================
+# DOCKER
+# ==============================================================
+docker-build:
+	docker build -t $(IMAGE) .
+
+docker-run: docker-build
+	docker run --rm --gpus all \
+		-v $(PWD):/workspace \
+		-v $(DATA_DIR):$(DATA_DIR):ro \
+		$(IMAGE) make all \
+			NFOLDS=$(NFOLDS) \
+			EPOCHS=$(EPOCHS) \
+			MODEL=$(MODEL) \
+			BATCH=$(BATCH) \
+			WORKERS=$(WORKERS)
