@@ -148,7 +148,13 @@ docker-build:
 	docker build -t $(IMAGE) .
 
 docker-run: docker-build
-	docker run --rm --gpus all \
+	docker run --rm \
+	--device=/dev/nvidia0 \
+	--device=/dev/nvidiactl \
+	--device=/dev/nvidia-uvm \
+	--device=/dev/nvidia-uvm-tools \
+		-u $$(id -u):$$(id -g) \
+		-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro \
 		-v $(PWD):/workspace \
 		-v $(DATA_DIR):$(DATA_DIR):ro \
 		$(IMAGE) make all \
@@ -157,3 +163,4 @@ docker-run: docker-build
 			MODEL=$(MODEL) \
 			BATCH=$(BATCH) \
 			WORKERS=$(WORKERS)
+
