@@ -34,7 +34,8 @@ DATASETS := hires lores
 LOSSES   := dice_ce cldice
 
 .PHONY: all setup analyze preprocess experiments train summary clean distclean \
-        docker-build docker-run
+        docker-build docker-run \
+        hires_dice_ce hires_cldice lores_dice_ce lores_cldice
 
 all: summary
 
@@ -121,6 +122,13 @@ endef
 $(foreach ds,$(DATASETS),$(foreach loss,$(LOSSES),$(eval $(call TRAIN_RULE,$(ds),$(loss)))))
 
 TRAIN_TARGETS := $(foreach ds,$(DATASETS),$(foreach loss,$(LOSSES),results/$(ds)_$(loss)/results.csv))
+
+# Named per-experiment targets — run one experiment end-to-end.
+# Each triggers the full upstream chain (setup → analyze → preprocess → train).
+define EXP_TARGET
+$(1)_$(2): results/$(1)_$(2)/results.csv
+endef
+$(foreach ds,$(DATASETS),$(foreach loss,$(LOSSES),$(eval $(call EXP_TARGET,$(ds),$(loss)))))
 
 train: $(TRAIN_TARGETS)
 
