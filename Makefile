@@ -156,11 +156,7 @@ docker-build:
 	docker build -t $(IMAGE) .
 
 docker-run: docker-build
-	docker run --rm \
-	--device=/dev/nvidia0 \
-	--device=/dev/nvidiactl \
-	--device=/dev/nvidia-uvm \
-	--device=/dev/nvidia-uvm-tools \
+	docker run --rm --gpus '"device=1"' \
 		-u $$(id -u):$$(id -g) \
 		-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro \
 		-v $(PWD):/workspace \
