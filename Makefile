@@ -29,6 +29,19 @@ WORKERS ?= 4
 IMAGE    ?= mist-hireslores
 DATA_DIR ?= /rsrch3/ip/dtfuentes/github/oncopigdata
 
+DOCKER_RUN = docker run --rm \
+	--device=/dev/nvidia0 \
+	--device=/dev/nvidiactl \
+	--device=/dev/nvidia-uvm \
+	--device=/dev/nvidia-uvm-tools \
+	-u $$(id -u):$$(id -g) \
+	-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro \
+	-v $(PWD):/workspace \
+	-v $(DATA_DIR):$(DATA_DIR):ro \
+	$(IMAGE)
+
+MIST_PARAMS = NFOLDS=$(NFOLDS) EPOCHS=$(EPOCHS) MODEL=$(MODEL) BATCH=$(BATCH) WORKERS=$(WORKERS)
+
 # ---- Experiment matrix ----
 DATASETS := hires lores
 LOSSES   := dice_ce cldice
@@ -123,10 +136,11 @@ $(foreach ds,$(DATASETS),$(foreach loss,$(LOSSES),$(eval $(call TRAIN_RULE,$(ds)
 
 TRAIN_TARGETS := $(foreach ds,$(DATASETS),$(foreach loss,$(LOSSES),results/$(ds)_$(loss)/results.csv))
 
-# Named per-experiment targets — run one experiment end-to-end.
-# Each triggers the full upstream chain (setup → analyze → preprocess → train).
+# Named per-experiment targets — run one experiment end-to-end inside Docker.
+# $$ defers DOCKER_RUN/MIST_PARAMS expansion past call so they resolve in the recipe.
 define EXP_TARGET
-$(1)_$(2): results/$(1)_$(2)/results.csv
+$(1)_$(2): docker-build
+	$$(DOCKER_RUN) make results/$(1)_$(2)/results.csv $$(MIST_PARAMS)
 endef
 $(foreach ds,$(DATASETS),$(foreach loss,$(LOSSES),$(eval $(call EXP_TARGET,$(ds),$(loss)))))
 
@@ -156,19 +170,5 @@ docker-build:
 	docker build -t $(IMAGE) .
 
 docker-run: docker-build
-	docker run --rm \
-	--device=/dev/nvidia0 \
-	--device=/dev/nvidiactl \
-	--device=/dev/nvidia-uvm \
-	--device=/dev/nvidia-uvm-tools \
-		-u $$(id -u):$$(id -g) \
-		-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro \
-		-v $(PWD):/workspace \
-		-v $(DATA_DIR):$(DATA_DIR):ro \
-		$(IMAGE) make all \
-			NFOLDS=$(NFOLDS) \
-			EPOCHS=$(EPOCHS) \
-			MODEL=$(MODEL) \
-			BATCH=$(BATCH) \
-			WORKERS=$(WORKERS)
+	$(DOCKER_RUN) make all $(MIST_PARAMS)
 
