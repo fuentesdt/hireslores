@@ -30,10 +30,7 @@ IMAGE    ?= mist-hireslores
 DATA_DIR ?= /rsrch3/ip/dtfuentes/github/oncopigdata
 
 DOCKER_RUN = docker run --rm \
-	--device=/dev/nvidia0 \
-	--device=/dev/nvidiactl \
-	--device=/dev/nvidia-uvm \
-	--device=/dev/nvidia-uvm-tools \
+	--gpus '"device=1"' \
 	-u $$(id -u):$$(id -g) \
 	-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro \
 	-v $(PWD):/workspace \
