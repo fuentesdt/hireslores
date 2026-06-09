@@ -15,6 +15,17 @@ import sys
 import pandas as pd
 from pathlib import Path
 
+
+def to_markdown(df: pd.DataFrame) -> str:
+    cols = list(df.columns)
+    header = "| " + " | ".join(cols) + " |"
+    sep = "| " + " | ".join(["---"] * len(cols)) + " |"
+    rows = [
+        "| " + " | ".join(str(df.loc[i, c]) for c in cols) + " |"
+        for i in df.index
+    ]
+    return "\n".join([header, sep] + rows)
+
 NON_METRIC = {"id", "mask", "prediction", "fold"}
 
 
@@ -45,10 +56,10 @@ def main() -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
         f.write("# HiRes vs LoRes — Loss Function Comparison\n\n")
-        f.write(df.to_markdown(index=False))
+        f.write(to_markdown(df))
         f.write("\n\n_Metrics are mean ± std across all cross-validation cases._\n")
 
-    print(df.to_string(index=False))
+    print(to_markdown(df))
     print(f"\nTable written to {output_path}")
 
 
